@@ -60,6 +60,7 @@ class SequenceClassification(PreTrainedModel):
 
         if output.loss is not None:
             adv_loss = torch.norm(output.logits - output_adv.logits, dim)
+            # a hyper-parameter can be added to weigh the loss of adversarial example - task specific
             loss = output.loss + adv_loss
             return loss, output.logits
         else:
